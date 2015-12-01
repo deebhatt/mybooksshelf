@@ -1,4 +1,7 @@
 activeuserprofiles=Abhijeet-PC;Team
 eclipse.preferences.version=1
 org.eclipse.rse.systemtype.local.systemType.defaultUserId=Abhijeet
+<<<<<<< HEAD
 useridperkey=Abhijeet-PC.Local\=Abhijeet;
+=======
+>>>>>>> 83ff176d5469752aa6080c1eeda2de3694eb9bdd

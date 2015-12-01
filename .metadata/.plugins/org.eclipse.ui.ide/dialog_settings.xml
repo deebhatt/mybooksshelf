@@ -4,20 +4,35 @@
 		<item value="341" key="DIALOG_Y_ORIGIN"/>
 		<item value="658" key="DIALOG_X_ORIGIN"/>
 	</section>
+<<<<<<< HEAD
 	<section name="ExternalProjectImportWizard">
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
 			<item value="C:\Users\DEEPAK\Downloads\mybooksshelf-master\mybooksshelf-master"/>
+=======
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+>>>>>>> 83ff176d5469752aa6080c1eeda2de3694eb9bdd
 			<item value="C:\Users\Abhijeet\Desktop\mybooksshelf"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
 		</list>
 	</section>
+<<<<<<< HEAD
 	<section name="WORKBENCH_SETTINGS">
 		<list key="ENABLED_TRANSFERS">
 		</list>
 	</section>
+=======
+>>>>>>> 83ff176d5469752aa6080c1eeda2de3694eb9bdd
 </section>

@@ -3,6 +3,7 @@ package com.mybooks.dao;
 import java.util.List;
 
 import com.mybooks.entities.BaseEntity;
+
 import com.mybooks.exception.DAOException;
 
 public interface IBaseDAO {

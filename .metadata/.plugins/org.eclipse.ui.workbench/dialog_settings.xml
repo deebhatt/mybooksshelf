@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+<<<<<<< HEAD
 	<section name="FileSystemImportWizard">
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
 		<item value="1025" key="dialogWidth"/>
 		<item value="533" key="dialogHeight"/>
+=======
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item value="1440" key="dialogWidth"/>
+		<item value="760" key="dialogHeight"/>
+>>>>>>> 83ff176d5469752aa6080c1eeda2de3694eb9bdd
 		<list key="orderedProviders">
 		</list>
 		<list key="textArray">
