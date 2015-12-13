@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mybooks.commons.ResponseMessage;
+import com.mybooks.entities.UserMaster;
+import com.mybooks.exception.EmailNotFoundException;
 import com.mybooks.mbeans.UserFormBean;
 import com.mybooks.service.RegistrationService;
+import com.mybooks.service.UserService;
 
 public class UserController {
 	
@@ -20,6 +23,9 @@ public class UserController {
 	
 	@Inject
 	private RegistrationService registrationService;
+	
+	@Inject
+	private UserService userService;
 
 	@RequestMapping(value = "/registeruser", method = RequestMethod.POST)
 	@ResponseBody
@@ -31,6 +37,31 @@ public class UserController {
 	@ResponseBody
 	public ResponseMessage resetPassword(@RequestBody UserFormBean userFormBean) {
 		return registrationService.resetPassword(userFormBean);
+	}
+	
+	@RequestMapping(value = "/changepassword", method = { RequestMethod.POST })
+	@ResponseBody
+	public ResponseMessage changePassword(@RequestBody UserFormBean userFormBean) {
+		return registrationService.changePassword(userFormBean);
+	}
+	
+	@RequestMapping(value = "/getUser", method = { RequestMethod.GET,
+			RequestMethod.POST})
+	@ResponseBody
+	public UserFormBean getUser() {
+		UserMaster user;
+		try {
+			user = userService.getLoggedInUser();
+		
+			UserFormBean bean = new UserFormBean();
+			bean.setEmail(user.getEmail());
+			bean.setFirstName(user.getFirstName());
+			bean.setLastName(user.getLastName());
+		return bean;
+		} catch (EmailNotFoundException e) {
+			LOG.error(e);
+			return null;
+		}
 	}
 
 }

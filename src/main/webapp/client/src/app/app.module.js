@@ -16,13 +16,9 @@
          */ 
         'app.core',
         'app.widgets',
-
-        /*
-         * Feature areas
-         */
-       
         'app.dashboard',
-        'app.layout'
+        'app.createaccount'/*,
+        'app.layout'*/
     ]);
 
 })();

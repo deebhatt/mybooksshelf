@@ -13,5 +13,9 @@ public class ApplicationConstants {
 	public static final String USER_EMAIL_SENT = "S";
 
 	public static final String USER_PASSWORD_EXPIRED = "E";
+	
+	public static final String ORDER_STATUS_PENDING = "P";
+
+	public static final String ORDER_STATUS_COMPLETED = "C";
 
 }

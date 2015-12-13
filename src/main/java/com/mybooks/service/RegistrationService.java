@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,6 +87,35 @@ public class RegistrationService {
 		} catch (Exception e) {
 			// Dont throw any errors to the screen to prevent account harvesting
 			LOG.warn("Errors while processing reset password", e);
+		}
+		return new ResponseMessage(
+				ResponseMessage.Type.success,
+				"The new password has been sent to your registered email. Please log into the application using it.");
+	}
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public ResponseMessage changePassword(UserFormBean userFormBean) {
+
+		// Get logged in user
+		try {
+			UserMaster user = userService.getLoggedInUser();
+
+			userValidator.isUserMasterDataValid(userFormBean,
+					VALIDATION_MODE.CHANGE_PASSWORD, user.getPassword());
+
+			String newPassword = userFormBean.getPassword();
+			user.setPassword(passwordEncoder.encode(newPassword));
+			user.setActive(ApplicationConstants.USER_ACTIVATED);
+			userService.updateUser(user);
+
+		} catch (UserProfileValidationException e) {
+			// TODO: Implement error message from exception
+			return new ResponseMessage(ResponseMessage.Type.danger,
+					"There was some validation errors. Please try again!!!");
+		} catch (Exception e) {
+			LOG.error("Error while changing pasword ", e);
+			return new ResponseMessage(ResponseMessage.Type.danger,
+					"Unable to change your password. Please try again!!!");
 		}
 		return new ResponseMessage(
 				ResponseMessage.Type.success,

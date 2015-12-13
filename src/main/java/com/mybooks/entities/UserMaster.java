@@ -56,6 +56,9 @@ public class UserMaster extends AuditableEntity implements BaseEntity, Serializa
 	@OneToMany(mappedBy = "masterUser")
 	private List<Address> addresses;
 	
+	@OneToMany(mappedBy = "customerDetails")
+	private List<OrderDetails> orders;
+	
 	public UserMaster() {
 	}
 
@@ -144,5 +147,13 @@ public class UserMaster extends AuditableEntity implements BaseEntity, Serializa
 
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
+	}
+
+	public List<OrderDetails> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<OrderDetails> orders) {
+		this.orders = orders;
 	}
 }

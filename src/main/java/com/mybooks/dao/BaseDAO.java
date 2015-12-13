@@ -18,7 +18,6 @@ public class BaseDAO implements IBaseDAO{
 		this.entityManager = entityManager;
 	}
 	
-
 	public <T extends BaseEntity> void persist(T anyEntity) throws DAOException {
 		try {
 			entityManager.persist(anyEntity);
@@ -27,7 +26,6 @@ public class BaseDAO implements IBaseDAO{
 		}
 	}
 
-	
 	@SuppressWarnings("unchecked")
 	public <T extends BaseEntity> List<T> findAll(Class<? extends T> anytype) throws DAOException
 	{

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.mybooks.enums.STATE_LIST;
 
 @Entity
 @Table(name = "USERS_ADDRESS")
@@ -36,7 +40,8 @@ public class Address extends AuditableEntity implements BaseEntity, Serializable
 	private String townOrCity;
 	
 	@Column(name = "STATE", length = 35)
-	private String state;
+	@Enumerated(EnumType.STRING)
+	private STATE_LIST state;
 	
 	@Column(name = "PINCODE")
 	private int pinCode;
@@ -100,11 +105,11 @@ public class Address extends AuditableEntity implements BaseEntity, Serializable
 		this.townOrCity = townOrCity;
 	}
 
-	public String getState() {
+	public STATE_LIST getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(STATE_LIST state) {
 		this.state = state;
 	}
 
