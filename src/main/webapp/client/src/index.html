@@ -36,6 +36,131 @@
 
 <body ng-app="app">
 
+<!-- Modal Login start -->
+<div class="modal signUpContent fade" id="ModalLogin" tabindex="-1" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                <h3 class="modal-title-site text-center"> MyBooksShelf</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group login-username">
+                    <div>
+                        <input name="log" id="login-user" class="form-control input" size="20"
+                               placeholder="Enter Username" type="text">
+                    </div>
+                </div>
+                <div class="form-group login-password">
+                    <div>
+                        <input name="Password" id="login-password" class="form-control input" size="20"
+                               placeholder="Password" type="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="checkbox login-remember">
+                            <label>
+                                <input name="rememberme" value="forever" checked="checked" type="checkbox">
+                                Remember Me </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <input name="submit" class="btn  btn-block btn-lg btn-primary" value="LOGIN" type="submit">
+                    </div>
+                </div>
+                <!--userForm-->
+
+            </div>
+            <div class="modal-footer">
+                <p class="text-center"> Not here before? <a data-toggle="modal" data-dismiss="modal"
+                                                            href="#ModalSignup"> Sign Up. </a> <br>
+                    <a href="forgot-password.html"> Lost your password? </a></p>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+
+    </div>
+    <!-- /.modal-dialog -->
+
+</div>
+<!-- /.Modal Login -->
+
+<!-- Modal Signup start -->
+<div class="modal signUpContent fade" id="ModalSignup" tabindex="-1" role="dialog" ng-controller="registrationController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                <h3 class="modal-title-site text-center"> REGISTER </h3>
+            </div>
+            <div class="modal-body">
+                <div class="control-group"><a class="fb_button btn  btn-block btn-lg " href="#"> SIGNUP WITH
+                    FACEBOOK </a></div>
+                <h5 style="padding:10px 0 10px 0;" class="text-center"> OR </h5>
+                
+                <div class="form-group reg-username">
+                    <div>
+                        <input name="login" class="form-control input" size="20" placeholder="Enter Username" ng-model="user.name"
+                               type="text">
+                    </div>
+                </div>
+                
+                <div class="form-group reg-email">
+                    <div>
+                        <input name="reg" class="form-control input" size="20" placeholder="Enter Email" type="email" ng-model="user.email">
+                    </div>
+                </div>
+                <div class="form-group reg-email">
+                    <div>
+                        <input name="reg" class="form-control input" size="20" placeholder="Confirm Email" type="email" ng-model="user.confirmEmail">
+                    </div>
+                </div>
+                <div class="form-group reg-password">
+                    <div>
+                        <input name="password" class="form-control input" size="20" placeholder="Password"
+                               type="password" ng-model="user.password">
+                    </div>
+                </div>
+                <div class="form-group reg-password">
+                    <div>
+                        <input name="confirmPassword" class="form-control input" size="20" placeholder="Confirm Password"
+                               type="password" ng-model="user.confirmPassword">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <div class="checkbox login-remember">
+                            <label>
+                                <input name="rememberme" id="rememberme" value="forever" checked="checked"
+                                       type="checkbox" ng->
+                                Remember Me </label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <input name="submit" class="btn  btn-block btn-lg btn-primary" value="REGISTER" type="submit" ng-click="Registration()">
+                    </div>
+                </div>
+                <!--userForm-->
+            </div>
+            <div class="modal-footer">
+                <p class="text-center"> Already member? <a data-toggle="modal" data-dismiss="modal" href="#ModalLogin">
+                    Sign in </a></p>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+
+    </div>
+    <!-- /.modal-dialog -->
+
+</div>
+<!-- /.ModalSignup End -->
+
+
 
 	<!-- Fixed navbar start -->
 	<div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
@@ -61,11 +186,9 @@
 							<ul class="userMenu">
 								<li><a href="account-1.html"><span class="hidden-xs"> My Account</span> <i
                                     class="glyphicon glyphicon-user hide visible-xs "></i></a></li>
-								<li>
-									<a href="#" data-toggle="modal" data-target="#ModalLogin"> <span class="hidden-xs">Sign In</span>
-										<i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a>
-								</li>
-								<li class="hidden-xs"><a href="#ModalSignup" data-toggle="modal" data-target="#ModalSignup" > Create
+								<li><a href="#" data-toggle="modal" data-target="#ModalLogin"><span class="hidden-xs">Sign In</span>
+                                <i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a></li>
+                            	<li class="hidden-xs"><a href="#" data-toggle="modal" data-target="#ModalSignup"> Create
                                 Account </a></li>
 							</ul>
 						</div>
@@ -74,7 +197,8 @@
 			</div>
 		</div>
 		<!--/.navbar-top-->
-
+		
+		
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only"> Toggle navigation </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span></button>
@@ -674,11 +798,8 @@
 <script src="client/src/app/dashboard/DashBoardController.js"></script>
 <script src="client/src/app/dashboard/DashBoardService.js"></script>
 
-<!-- create account -->
-<script src="client/src/app/account/createaccount.module.js"></script>
-<script src="client/src/app/account/createaccount.route.js"></script>
-<script src="client/src/app/account/CreateAccountController.js"></script>
-
+<!-- Registration -->
+<script src="client/src/app/widgets/registrationController.js"></script>
 
 <!-- endinject -->
 

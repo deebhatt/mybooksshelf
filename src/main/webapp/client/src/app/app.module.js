@@ -17,7 +17,7 @@
         'app.core',
         'app.widgets',
         'app.dashboard',
-        'app.createaccount'/*,
+        'app.reg'/*,
         'app.layout'*/
     ]);
 
