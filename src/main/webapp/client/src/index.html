@@ -103,7 +103,7 @@
                 
                 <div class="form-group reg-username">
                     <div>
-                        <input name="login" class="form-control input" size="20" placeholder="Enter Username" ng-model="user.name"
+                        <input name="login" class="form-control input" size="20" placeholder="Enter Username" ng-model="user.firstName"
                                type="text">
                     </div>
                 </div>
@@ -140,6 +140,7 @@
                         </div>
                     </div>
                 </div>
+                {{registrationMessage | json}}
                 <div>
                     <div>
                         <input name="submit" class="btn  btn-block btn-lg btn-primary" value="REGISTER" type="submit" ng-click="Registration()">

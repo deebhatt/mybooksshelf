@@ -1,5 +1,8 @@
 package com.mybooks.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
@@ -7,11 +10,15 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mybooks.commons.ResponseMessage;
 import com.mybooks.constants.ApplicationConstants;
+import com.mybooks.entities.Roles;
 import com.mybooks.entities.UserMaster;
+import com.mybooks.enums.USER_ROLES;
 import com.mybooks.enums.VALIDATION_MODE;
 import com.mybooks.exception.DAOException;
 import com.mybooks.exception.UserProfileValidationException;
@@ -22,6 +29,8 @@ import com.mybooks.utility.EmailFormatter;
 import com.mybooks.utility.SecurityUtil;
 import com.mybooks.validator.UserValidator;
 
+@Service("registrationService")
+@Repository
 public class RegistrationService {
 	
 	private static final Log LOG = LogFactory.getLog(RegistrationService.class);
@@ -51,7 +60,9 @@ public class RegistrationService {
 			userMaster.setPassword(passwordEncoder.encode(userFormBean
 					.getPassword()));
 			userMaster.setVerified(ApplicationConstants.EMAIL_VERIFIED_NO);
-			userMaster.setActive(ApplicationConstants.USER_DEACTIVATED);
+			userMaster.setActive(ApplicationConstants.USER_ACTIVATED);
+			
+			userMaster.setListOfRoles(userFormBean.getRoles());
 			userService.saveUser(userMaster);
 			
 			return new ResponseMessage(

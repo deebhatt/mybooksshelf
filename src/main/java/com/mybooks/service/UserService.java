@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mybooks.dao.UserDAO;
+import com.mybooks.entities.Roles;
 import com.mybooks.entities.UserMaster;
 import com.mybooks.exception.DAOException;
 import com.mybooks.exception.DBRecordNotFoundException;
 import com.mybooks.exception.EmailNotFoundException;
+import com.mybooks.exception.RoleNotFoundException;
 import com.mybooks.exception.UserServiceException;
 
 @Service("userService")
@@ -58,6 +60,22 @@ public class UserService {
 		// Retrieve user from database
 		UserMaster user = findByEmail(email);
 		return user;
+	}
+	
+	public void saveRole(Roles roles) throws UserServiceException {
+		try {
+			userDAO.persist(roles);
+		} catch (DAOException e) {
+			throw new UserServiceException(e);
+		}
+	}
+	
+	public Roles findRoleByName(String roleName) throws RoleNotFoundException {
+		try {
+			return userDAO.findRoleByName(roleName);
+		} catch (DBRecordNotFoundException e) {
+			throw new RoleNotFoundException(e);
+		}
 	}
 
 }

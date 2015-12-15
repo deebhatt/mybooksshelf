@@ -1,5 +1,7 @@
 package com.mybooks.validator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,10 +14,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.mybooks.commons.ResponseMessage;
+import com.mybooks.entities.Roles;
 import com.mybooks.enums.USER_PROFILE_ERR_CODES;
+import com.mybooks.enums.USER_ROLES;
 import com.mybooks.enums.VALIDATION_MODE;
 import com.mybooks.exception.EmailNotFoundException;
+import com.mybooks.exception.RoleNotFoundException;
 import com.mybooks.exception.UserProfileValidationException;
+import com.mybooks.exception.UserServiceException;
 import com.mybooks.mbeans.UserFormBean;
 import com.mybooks.service.UserService;
 
@@ -84,10 +91,12 @@ public class UserValidator {
 			throws UserProfileValidationException {
 		validateFirstNameMandatory(userFormBean);
 		validateEmailMandatory(userFormBean);
+		validateConfirmEmailMandatory(userFormBean);
 		validateNewPasswordMandatory(userFormBean);
 		validateConfirmPasswordMandatory(userFormBean);
 		validateEmailValue(userFormBean);
 		validateNewAndConfirmPasswordValues(userFormBean);
+		setUsersRole(userFormBean);
 	}
 
 	private void validateNewAndConfirmPasswordValues(UserFormBean userFormBean)
@@ -143,6 +152,15 @@ public class UserValidator {
 					USER_PROFILE_ERR_CODES.VALUE_REQUIRED);
 		}
 	}
+	
+	private void validateConfirmEmailMandatory(UserFormBean userFormBean)
+			throws UserProfileValidationException {
+		if (StringUtils.isEmpty(userFormBean.getConfirmEmail())) {
+			LOG.debug("Confirm Email Required");
+			throw new UserProfileValidationException(
+					USER_PROFILE_ERR_CODES.VALUE_REQUIRED);
+		}
+	}
 
 	private void validateConfirmPasswordMandatory(UserFormBean userFormBean)
 			throws UserProfileValidationException {
@@ -169,5 +187,30 @@ public class UserValidator {
 			throw new UserProfileValidationException(
 					USER_PROFILE_ERR_CODES.VALUE_REQUIRED);
 		}
+	}
+	
+	private void setUsersRole(UserFormBean userFormBean)
+			throws UserProfileValidationException {
+			Roles assignRole = null;
+			try {
+				assignRole = userService.findRoleByName(USER_ROLES.ROLE_USER.toString());
+			} catch (RoleNotFoundException e) {
+				LOG.debug("Assigned Role doesnot exist");
+			}
+			try{
+				if(assignRole == null){
+					assignRole = new Roles();
+					assignRole.setRoleName(USER_ROLES.ROLE_USER.toString());
+					userService.saveRole(assignRole);
+				}
+				
+			} catch (UserServiceException e) {
+				LOG.error("There was a technical error while registering", e);
+			}
+			finally{
+				List<Roles> listOfRoles = new ArrayList<Roles>();
+				listOfRoles.add(assignRole);
+				userFormBean.setRoles(listOfRoles);
+			}
 	}
 }

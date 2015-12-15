@@ -1,12 +1,14 @@
 package com.mybooks.dao;
 
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.mybooks.entities.Roles;
 import com.mybooks.entities.UserMaster;
 import com.mybooks.exception.DBRecordNotFoundException;
 
@@ -18,10 +20,22 @@ public class UserDAO extends BaseDAO{
 			throws DBRecordNotFoundException{
 		try {
 			Query q = entityManager
-					.createQuery("select e from UserMaster e where e.email = ?");
-			q.setParameter(1, email);
+					.createQuery("select e from UserMaster e where e.email = :email");
+			q.setParameter("email", email);
 			return (UserMaster) q.getSingleResult();
-		} catch (EmptyResultDataAccessException e) {
+		} catch (NoResultException e) {
+			throw new DBRecordNotFoundException(e);
+		}
+	}
+	
+	public Roles findRoleByName(String roleName)
+			throws DBRecordNotFoundException{
+		try {
+			Query q = entityManager
+					.createQuery("select e from Roles e where e.roleName = :roleName");
+			q.setParameter("roleName", roleName);
+			return (Roles) q.getSingleResult();
+		} catch (NoResultException e) {
 			throw new DBRecordNotFoundException(e);
 		}
 	}

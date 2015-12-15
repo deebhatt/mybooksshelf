@@ -6,10 +6,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
 import com.mybooks.exception.EmailSenderServiceException;
 import com.mybooks.utility.PropertiesUtil;
 
+@Service("emailSenderService")
 public class MailSenderServiceImpl implements EmailSenderService{
 	
 	private static final Log LOG = LogFactory

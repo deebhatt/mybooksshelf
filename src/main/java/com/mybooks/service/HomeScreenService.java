@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.mybooks.dao.HomeScreenDAO;
@@ -15,7 +16,8 @@ import com.mybooks.mbeans.CategoryBean;
 import com.mybooks.mbeans.ProductBean;
 import com.mybooks.mbeans.SubCategoryBean;
 
-@Service
+@Service("homescreenservice")
+@Repository
 public class HomeScreenService {
 	
 	@Inject

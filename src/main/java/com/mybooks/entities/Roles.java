@@ -23,7 +23,7 @@ public class Roles extends AuditableEntity implements BaseEntity, Serializable{
 	@Column(name = "ROLE_ID", unique = true, nullable = false)
 	private Long roleId;
 	
-	@Column(name = "ROLE_NAME", length = 35)
+	@Column(name = "ROLE_NAME", length = 35, unique = true)
 	private String roleName;
 	
 	@ManyToMany(mappedBy = "listOfRoles")

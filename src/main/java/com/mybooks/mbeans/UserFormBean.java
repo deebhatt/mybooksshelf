@@ -1,5 +1,12 @@
 package com.mybooks.mbeans;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mybooks.entities.Roles;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class UserFormBean {
 	
 	private Long userId;
@@ -7,6 +14,8 @@ public class UserFormBean {
 	private String active;
 
 	private String email;
+	
+	private String confirmEmail;
 
 	private String firstName;
 
@@ -19,6 +28,9 @@ public class UserFormBean {
 	private String confirmPassword;
 
 	private String verified;
+	
+	@JsonIgnore
+	private List<Roles>  roles;
 
 	public Long getUserId() {
 		return userId;
@@ -42,6 +54,14 @@ public class UserFormBean {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getConfirmEmail() {
+		return confirmEmail;
+	}
+
+	public void setConfirmEmail(String confirmEmail) {
+		this.confirmEmail = confirmEmail;
 	}
 
 	public String getFirstName() {
@@ -92,4 +112,11 @@ public class UserFormBean {
 		this.verified = verified;
 	}
 
+	public List<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
+	}
 }

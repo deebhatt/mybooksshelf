@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import com.mybooks.mbeans.UserFormBean;
 import com.mybooks.service.RegistrationService;
 import com.mybooks.service.UserService;
 
+@Controller
 public class UserController {
 	
 	private static final Log LOG = LogFactory
