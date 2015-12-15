@@ -10,4 +10,8 @@ public class UserProfileValidationException extends BaseException{
 		this.errorCode = errorCode;
 	}
 
+	public USER_PROFILE_ERR_CODES getErrorCode() {
+		return errorCode;
+	}
+
 }

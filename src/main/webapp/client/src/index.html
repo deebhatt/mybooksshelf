@@ -135,12 +135,14 @@
                         <div class="checkbox login-remember">
                             <label>
                                 <input name="rememberme" id="rememberme" value="forever" checked="checked"
-                                       type="checkbox" ng->
+                                       type="checkbox" >
                                 Remember Me </label>
                         </div>
                     </div>
                 </div>
-                {{registrationMessage | json}}
+                <label>
+                	{{registrationMessage}}
+                </label>
                 <div>
                     <div>
                         <input name="submit" class="btn  btn-block btn-lg btn-primary" value="REGISTER" type="submit" ng-click="Registration()">

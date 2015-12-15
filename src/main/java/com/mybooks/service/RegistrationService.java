@@ -67,12 +67,11 @@ public class RegistrationService {
 			
 			return new ResponseMessage(
 					ResponseMessage.Type.success,
-					"You have been successfully registered. A verification link has been sent to your email. "
-					+ "Please verify it to continue playing the game", Long.toString(userMaster.getUserId()));
+					"You have been successfully registered", Long.toString(userMaster.getUserId()));
 		}	catch(UserProfileValidationException e)	{
 			LOG.error("There was a validation error while registering", e);
 			return new ResponseMessage(ResponseMessage.Type.danger,
-					"There was a validation error while registering. Please try again");
+					e.getErrorCode().toString());
 		} catch (UserServiceException e) {
 			LOG.error("There was a technical error while registering", e);
 			return new ResponseMessage(ResponseMessage.Type.danger,

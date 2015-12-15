@@ -8,7 +8,7 @@
     		
     		$http.post('registeruser', JSON.stringify($scope.user)).then(function (response) {
             	console.log(response.data);
-            	vm.registrationMessage = response.data;
+            	$scope.registrationMessage = response.data.text;
             });
     	};
     	
