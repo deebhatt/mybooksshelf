@@ -31,7 +31,8 @@ public class HomeScreenService {
 		{
 			CategoryBean categorybean = new CategoryBean();
 			categorybean.setId(category.getId());
-			categorybean.setCategory_name(category.getCategory_name());
+			categorybean.setcategoryName(category.getcategoryName());
+			categorybean.setcategoryLabel(category.getCategoryLabel());
 			
 			List<SubCategory> mastersubcategory = category.getSubcategory();
 			List<SubCategoryBean> subcategorylist = new ArrayList<SubCategoryBean>();
@@ -39,7 +40,8 @@ public class HomeScreenService {
 			{
 				SubCategoryBean subcategorybean = new SubCategoryBean();
 				subcategorybean.setId(subcategory.getId());
-				subcategorybean.setSubcategory_name(subcategory.getSubcategory_name());
+				subcategorybean.setsubcategoryName(subcategory.getsubcategoryName());
+				subcategorybean.setSubcategoryLabel(subcategory.getSubcategoryLabel());
 				subcategorylist.add(subcategorybean);
 			}
 			categorybean.setListofsubcategories(subcategorylist);
@@ -57,12 +59,13 @@ public class HomeScreenService {
 		{
 			ProductBean productbean = new ProductBean();
 			productbean.setProductName(products.getProductName());
+			productbean.setProductLabel(products.getProductLabel());
 			productbean.setPrice(products.getPrice());
 			productbean.setImages(products.getImages());
 			productbean.setProductCode(products.getProductCode());
 			CategoryBean categorybean = new CategoryBean();
 			categorybean.setId(products.getCategory().getId());
-			categorybean.setCategory_name(products.getCategory().getCategory_name());
+			categorybean.setcategoryName(products.getCategory().getcategoryName());
 			productbean.setCategory(categorybean);
 			productslist.add(productbean);
 		}

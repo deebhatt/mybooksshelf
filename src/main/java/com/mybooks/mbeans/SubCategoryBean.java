@@ -8,7 +8,9 @@ public class SubCategoryBean {
 	
 	private Long id;
 	
-	private String subcategory_name;
+	private String subcategoryName;
+
+	private String subcategoryLabel;
 	
 	private String description;
 
@@ -20,12 +22,20 @@ public class SubCategoryBean {
 		this.id = id;
 	}
 
-	public String getSubcategory_name() {
-		return subcategory_name;
+	public String getsubcategoryName() {
+		return subcategoryName;
 	}
 
-	public void setSubcategory_name(String subcategory_name) {
-		this.subcategory_name = subcategory_name;
+	public void setsubcategoryName(String subcategoryName) {
+		this.subcategoryName = subcategoryName;
+	}
+	
+	public String getSubcategoryLabel() {
+		return subcategoryLabel;
+	}
+
+	public void setSubcategoryLabel(String subcategoryLabel) {
+		this.subcategoryLabel = subcategoryLabel;
 	}
 
 	public String getDescription() {

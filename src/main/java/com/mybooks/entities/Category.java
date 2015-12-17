@@ -25,8 +25,11 @@ public class Category extends AuditableEntity implements BaseEntity{
 	@Column(name = "CATEGORY_ID", unique = true, nullable = false)
 	private Long id;
 	
-	@Column(name = "CATEGORY_NAME", length = 35, nullable = false)
-	private String category_name;
+	@Column(name = "CATEGORY_NAME", nullable = false, length = 35)
+	private String categoryName;
+	
+	@Column(name = "CATEGORY_LABEL", nullable = false, length = 35)
+	private String categoryLabel;
 	
 	@Column(name = "CATEGORY_DESCRIPTION", length = 105)
 	private String description;
@@ -49,12 +52,12 @@ public class Category extends AuditableEntity implements BaseEntity{
 		this.id = id;
 	}
 
-	public String getCategory_name() {
-		return category_name;
+	public String getcategoryName() {
+		return categoryName;
 	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setcategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getDescription() {
@@ -79,6 +82,14 @@ public class Category extends AuditableEntity implements BaseEntity{
 
 	public void setProducts(List<Products> products) {
 		this.products = products;
+	}
+
+	public String getCategoryLabel() {
+		return categoryLabel;
+	}
+
+	public void setCategoryLabel(String categoryLabel) {
+		this.categoryLabel = categoryLabel;
 	}
 
 }

@@ -13,6 +13,8 @@ public class ProductBean {
 	
 	private String productName;
 	
+	private String productLabel;
+	
 	private String productCode;
 	
 	private BigDecimal Price;
@@ -47,6 +49,14 @@ public class ProductBean {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public String getProductLabel() {
+		return productLabel;
+	}
+
+	public void setProductLabel(String productLabel) {
+		this.productLabel = productLabel;
 	}
 
 	public String getProductCode() {

@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('app.dashboard')
+		.module('app.product')
 		.run(appRun);
 
 	/* @ngInject */
@@ -13,13 +13,13 @@
 	function getStates() {
 		return [
 			{
-				state: '/',
+				state: '/:productName',
 				config: {
-					url: '/',
+					url: '/:productName',
 					views: {
 						'mainContent': {
-							templateUrl: 'client/src/app/dashboard/dashboard.html',
-							controller : 'DashBoardController as vm'
+							templateUrl: 'client/src/app/products_and_categories/product-details.html',
+							controller : 'productController as vm'
 						}
 					}
 

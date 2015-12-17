@@ -26,8 +26,11 @@ public class SubCategory extends AuditableEntity implements BaseEntity{
 	@Column(name = "SUBCATEGORY_ID", unique = true, nullable = false)
 	private Long id;
 	
-	@Column(name = "SUBCATEGORY_NAME", length = 35)
-	private String subcategory_name;
+	@Column(name = "SUBCATEGORY_NAME", nullable = false, length = 35)
+	private String subcategoryName;
+	
+	@Column(name = "SUBCATEGORY_LABEL", nullable = false, length = 35)
+	private String subcategoryLabel;
 	
 	@Column(name = "SUBCATEGORY_DESCRIPTION", length = 105)
 	private String description;
@@ -51,12 +54,12 @@ public class SubCategory extends AuditableEntity implements BaseEntity{
 		this.id = id;
 	}
 
-	public String getSubcategory_name() {
-		return subcategory_name;
+	public String getsubcategoryName() {
+		return subcategoryName;
 	}
 
-	public void setSubcategory_name(String subcategory_name) {
-		this.subcategory_name = subcategory_name;
+	public void setsubcategoryName(String subcategoryName) {
+		this.subcategoryName = subcategoryName;
 	}
 
 	public String getDescription() {
@@ -81,6 +84,14 @@ public class SubCategory extends AuditableEntity implements BaseEntity{
 
 	public void setListofProducts(List<Products> listofProducts) {
 		this.listofProducts = listofProducts;
+	}
+
+	public String getSubcategoryLabel() {
+		return subcategoryLabel;
+	}
+
+	public void setSubcategoryLabel(String subcategoryLabel) {
+		this.subcategoryLabel = subcategoryLabel;
 	}
 
 }

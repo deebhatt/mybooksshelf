@@ -31,6 +31,9 @@ public class Products extends AuditableEntity implements BaseEntity{
 	@Column(name = "PRODUCT_NAME", nullable = false, length = 35)
 	private String productName;
 	
+	@Column(name = "PRODUCT_LABEL", nullable = false, length = 35)
+	private String productLabel;
+	
 	@Column(name = "PRODUCT_CODE", nullable = false, length = 35)
 	private String productCode;
 	
@@ -83,6 +86,14 @@ public class Products extends AuditableEntity implements BaseEntity{
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public String getProductLabel() {
+		return productLabel;
+	}
+
+	public void setProductLabel(String productLabel) {
+		this.productLabel = productLabel;
 	}
 
 	public String getProductCode() {

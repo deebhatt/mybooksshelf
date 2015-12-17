@@ -16,15 +16,10 @@
 
 	<!-- Custom styles for this template -->
 	<link href="client/src/assets/css/style.css" rel="stylesheet">
-
-	<!-- Just for debugging purposes. -->
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-
-	<!-- include pace script for automatic web page progress bar  -->
+	
+	<!-- styles needed by smoothproducts.js for product zoom  -->
+    <link rel="stylesheet" href="client/src/assets/css/smoothproducts.css">
+    <link href="client/src/assets/plugins/rating/bootstrap-rating.css" rel="stylesheet">
 
 	<script>
 		paceOptions = {
@@ -248,24 +243,6 @@
 								<tr class="miniCartProduct">
 									<td style="width:20%" class="miniCartProductThumb">
 										<div>
-											<a href="product-details.html"> <img src="client/src/client/src/images/product/3.jpg" alt="img"> </a>
-										</div>
-									</td>
-									<td style="width:40%">
-										<div class="miniCartDescription">
-											<h4><a href="product-details.html"> TSHOP T shirt Black </a></h4>
-											<span class="size"> 12 x 1.5 L </span>
-
-											<div class="price"><span> $8.80 </span></div>
-										</div>
-									</td>
-									<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-									<td style="width:15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-									<td style="width:5%" class="delete"><a> x </a></td>
-								</tr>
-								<tr class="miniCartProduct">
-									<td style="width:20%" class="miniCartProductThumb">
-										<div>
 											<a href="product-details.html"> <img src="client/src/images/product/2.jpg" alt="img"> </a>
 										</div>
 									</td>
@@ -285,60 +262,6 @@
 									<td style="width:20%" class="miniCartProductThumb">
 										<div>
 											<a href="product-details.html"> <img src="client/src/images/product/5.jpg" alt="img"> </a>
-										</div>
-									</td>
-									<td style="width:40%">
-										<div class="miniCartDescription">
-											<h4><a href="product-details.html"> TSHOP T shirt Black </a></h4>
-											<span class="size"> 12 x 1.5 L </span>
-
-											<div class="price"><span> $8.80 </span></div>
-										</div>
-									</td>
-									<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-									<td style="width:15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-									<td style="width:5%" class="delete"><a> x </a></td>
-								</tr>
-								<tr class="miniCartProduct">
-									<td style="width:20%" class="miniCartProductThumb">
-										<div>
-											<a href="product-details.html"> <img src="client/src/images/product/3.jpg" alt="img"> </a>
-										</div>
-									</td>
-									<td style="width:40%">
-										<div class="miniCartDescription">
-											<h4><a href="product-details.html"> TSHOP T shirt Black </a></h4>
-											<span class="size"> 12 x 1.5 L </span>
-
-											<div class="price"><span> $8.80 </span></div>
-										</div>
-									</td>
-									<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-									<td style="width:15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-									<td style="width:5%" class="delete"><a> x </a></td>
-								</tr>
-								<tr class="miniCartProduct">
-									<td style="width:20%" class="miniCartProductThumb">
-										<div>
-											<a href="product-details.html"> <img src="client/src/images/product/3.jpg" alt="img"> </a>
-										</div>
-									</td>
-									<td style="width:40%">
-										<div class="miniCartDescription">
-											<h4><a href="product-details.html"> TSHOP T shirt Black </a></h4>
-											<span class="size"> 12 x 1.5 L </span>
-
-											<div class="price"><span> $8.80 </span></div>
-										</div>
-									</td>
-									<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-									<td style="width:15%" class="miniCartSubtotal"><span> $8.80 </span></td>
-									<td style="width:5%" class="delete"><a> x </a></td>
-								</tr>
-								<tr class="miniCartProduct">
-									<td style="width:20%" class="miniCartProductThumb">
-										<div>
-											<a href="product-details.html"> <img src="client/src/images/product/4.jpg" alt="img"> </a>
 										</div>
 									</td>
 									<td style="width:40%">
@@ -382,9 +305,9 @@
 								<!-- megamenu-content -->
 								<ul class="col-lg-2  col-sm-2 col-md-2  unstyled" ng-repeat = "categories in categoriesArray">
 									<li>
-										<p><a href="#/categories.name"><strong> {{categories.category_name}} </strong></a> </p>
+										<p><a href="#/{{categories.categoryName}}"><strong> {{categories.categoryLabel}} </strong></a> </p>
 									</li>
-									<li ng-repeat = "subCat in categories.listofsubcategories"><a href="#"> {{subCat.subcategory_name}} </a></li>
+									<li ng-repeat = "subCat in categories.listofsubcategories"><a href="#"> {{subCat.subcategoryLabel}} </a></li>
 								</ul>
 							</li>
 						</ul>
@@ -457,81 +380,6 @@
 											</td>
 											<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
 											<td style="width:15%" class="miniCartSubtotal"><span> $120 </span></td>
-											<td style="width:5%" class="delete"><a> x </a></td>
-										</tr>
-										<tr class="miniCartProduct">
-											<td style="width:20%" class="miniCartProductThumb">
-												<div>
-													<a href="product-details.html"> <img src="client/src/images/product/5.jpg" alt="img">
-													</a>
-												</div>
-											</td>
-											<td style="width:40%">
-												<div class="miniCartDescription">
-													<h4><a href="product-details.html"> Tshir 2014 </a></h4>
-													<span class="size"> 12 x 1.5 L </span>
-
-													<div class="price"><span> $30 </span></div>
-												</div>
-											</td>
-											<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-											<td style="width:15%" class="miniCartSubtotal"><span> $80 </span></td>
-											<td style="width:5%" class="delete"><a> x </a></td>
-										</tr>
-										<tr class="miniCartProduct">
-											<td style="width:20%" class="miniCartProductThumb">
-												<div>
-													<a href="product-details.html"> <img src="client/src/images/product/3.jpg" alt="img">
-													</a>
-												</div>
-											</td>
-											<td style="width:40%">
-												<div class="miniCartDescription">
-													<h4><a href="product-details.html"> TSHOP T shirt DO20 </a></h4>
-													<span class="size"> 12 x 1.5 L </span>
-
-													<div class="price"><span> $15 </span></div>
-												</div>
-											</td>
-											<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-											<td style="width:15%" class="miniCartSubtotal"><span> $55 </span></td>
-											<td style="width:5%" class="delete"><a> x </a></td>
-										</tr>
-										<tr class="miniCartProduct">
-											<td style="width:20%" class="miniCartProductThumb">
-												<div>
-													<a href="product-details.html"> <img src="client/src/images/product/4.jpg" alt="img">
-													</a>
-												</div>
-											</td>
-											<td style="width:40%">
-												<div class="miniCartDescription">
-													<h4><a href="product-details.html"> T shirt Black </a></h4>
-													<span class="size"> 12 x 1.5 L </span>
-
-													<div class="price"><span> $44 </span></div>
-												</div>
-											</td>
-											<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-											<td style="width:15%" class="miniCartSubtotal"><span> $40 </span></td>
-											<td style="width:5%" class="delete"><a> x </a></td>
-										</tr>
-										<tr class="miniCartProduct">
-											<td style="width:20%" class="miniCartProductThumb">
-												<div>
-													<a href="product-details.html"> <img src="client/src/images/site/winter.jpg" alt="img"> </a>
-												</div>
-											</td>
-											<td style="width:40%">
-												<div class="miniCartDescription">
-													<h4><a href="product-details.html"> G Star T shirt </a></h4>
-													<span class="size"> 12 x 1.5 L </span>
-
-													<div class="price"><span> $80 </span></div>
-												</div>
-											</td>
-											<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-											<td style="width:15%" class="miniCartSubtotal"><span> $8.80 </span></td>
 											<td style="width:5%" class="delete"><a> x </a></td>
 										</tr>
 									</tbody>
@@ -715,6 +563,32 @@
 			$('#modalAds').removeClass('hide');
 		});
 	</script>
+	<script>
+    $(function () {
+
+        $('.rating-tooltip-manual').rating({
+            extendSymbol: function () {
+                var title;
+                $(this).tooltip({
+                    container: 'body',
+                    placement: 'bottom',
+                    trigger: 'manual',
+                    title: function () {
+                        return title;
+                    }
+                });
+                $(this).on('rating.rateenter', function (e, rate) {
+                    title = rate;
+                    $(this).tooltip('show');
+                })
+                        .on('rating.rateleave', function () {
+                            $(this).tooltip('hide');
+                        });
+            }
+        });
+
+    });
+	</script>
 
 	<!-- include jqueryCycle plugin -->
 	<script src="client/src/assets/js/jquery.cycle2.min.js"></script>
@@ -751,8 +625,6 @@
 	<script src="client/src/assets/js/home.js"></script>
 	<!-- include custom script for site  -->
 	<script src="client/src/assets/js/script.js"></script>
-	<script>
-	</script>
 
 </body>
 <!-- inject-vendor:js -->
@@ -804,6 +676,10 @@
 <!-- Registration -->
 <script src="client/src/app/widgets/registrationController.js"></script>
 
+<!-- Products and Category -->
+<script src="client/src/app/products_and_categories/product.module.js"></script>
+<script src="client/src/app/products_and_categories/product.route.js"></script>
+<script src="client/src/app/products_and_categories/productController.js"></script>
 <!-- endinject -->
 
 
