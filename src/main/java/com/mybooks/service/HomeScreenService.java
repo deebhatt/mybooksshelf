@@ -12,6 +12,7 @@ import com.mybooks.dao.HomeScreenDAO;
 import com.mybooks.entities.Category;
 import com.mybooks.entities.Products;
 import com.mybooks.entities.SubCategory;
+import com.mybooks.exception.DBRecordNotFoundException;
 import com.mybooks.mbeans.CategoryBean;
 import com.mybooks.mbeans.ProductBean;
 import com.mybooks.mbeans.SubCategoryBean;
@@ -71,5 +72,29 @@ public class HomeScreenService {
 		}
 		return productslist;
 	}
+	
+	public ProductBean getProductbyName(String productName)
+	{
+		ProductBean product = null;
+		try{
+			Products getproduct = screendao.getProductbyName(productName);
+			product = new ProductBean();
+			product.setAuthor(getproduct.getAuthor());
+			product.setDescription(getproduct.getDescription());
+			product.setEdition(getproduct.getEdition());
+			product.setImages(getproduct.getImages());
+			product.setPrice(getproduct.getPrice());
+			product.setProductCode(getproduct.getProductCode());
+			product.setProductLabel(getproduct.getProductLabel());
+			product.setProductName(getproduct.getProductName());
+			product.setPublisher(getproduct.getPublisher());
+			product.setQuantity(getproduct.getQuantity());
+		}  catch(DBRecordNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return product;
+	}
+	
+	
 
 }

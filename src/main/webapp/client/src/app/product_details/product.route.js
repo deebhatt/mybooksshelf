@@ -1,0 +1,30 @@
+(function () {
+	'use strict';
+
+	angular
+		.module('app.product')
+		.run(appRun);
+
+	/* @ngInject */
+	function appRun(routerHelper) {
+		routerHelper.configureStates(getStates());
+	}
+
+	function getStates() {
+		return [
+			{
+				state: '/product/:productName',
+				config: {
+					url: '/product/:productName',
+					views: {
+						'mainContent': {
+							templateUrl: 'client/src/app/product_details/product-details.html',
+							controller : 'productController as vm'
+						}
+					}
+
+				}
+            }
+        ];
+	}
+})();

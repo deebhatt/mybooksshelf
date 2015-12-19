@@ -18,7 +18,8 @@
         'app.widgets',
         'app.dashboard',
         'app.reg',
-        'app.product'/*,
+        'app.product',
+        'app.category'/*,
         'app.layout'*/
     ]);
 
