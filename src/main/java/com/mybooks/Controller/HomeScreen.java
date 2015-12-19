@@ -22,8 +22,8 @@ public class HomeScreen {
 	@Inject
 	private HomeScreenService homescreenservice;
 	
-	@RequestMapping(value="/getCategories" ,method=RequestMethod.GET)
-	public @ResponseBody List<CategoryBean> getCategories()
+	@RequestMapping(value="/getCategoriesandSubCategories" ,method=RequestMethod.GET)
+	public @ResponseBody List<CategoryBean> getCategoriesandSubCategories()
 	{
 		return homescreenservice.findcategories();
 	}

@@ -4,11 +4,12 @@
     /*ng-inject*/
     function categoryController($http, $stateParams) {
     	var vm = this;
-    	console.log('Category Name '+$stateParams.categoryName);
-    	  /*$http.get('getProducts')
+    	vm.categoryName = $stateParams.categoryName;
+    	  $http.get('getProducts')
         .then(function (response) {
+        	//var products = response.data;
         	vm.products = response.data;
-        });*/
+        });
     	
     }
 })();
