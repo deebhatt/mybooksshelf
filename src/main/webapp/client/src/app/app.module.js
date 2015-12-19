@@ -19,7 +19,8 @@
         'app.dashboard',
         'app.reg',
         'app.product',
-        'app.category'/*,
+        'app.category',
+        'app.subcategory'/*,
         'app.layout'*/
     ]);
 

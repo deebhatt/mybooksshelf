@@ -305,9 +305,9 @@
 								<!-- megamenu-content -->
 								<ul class="col-lg-2  col-sm-2 col-md-2  unstyled" ng-repeat = "categories in categoriesArray">
 									<li>
-										<p><a href="#/{{categories.categoryName}}"><strong> {{categories.categoryLabel}} </strong></a> </p>
+										<p><a ng-href="#/{{categories.categoryName}}"><strong> {{categories.categoryLabel}} </strong></a> </p>
 									</li>
-									<li ng-repeat = "subCat in categories.listofsubcategories"><a href="#"> {{subCat.subcategoryLabel}} </a></li>
+									<li ng-repeat = "subCat in categories.listofsubcategories"><a ng-href="#/{{categories.categoryName}}/{{subCat.subcategoryName}}"> {{subCat.subcategoryLabel}} </a></li>
 								</ul>
 							</li>
 						</ul>
@@ -666,6 +666,11 @@
 <script src="client/src/app/categories/category.module.js"></script>
 <script src="client/src/app/categories/category.route.js"></script>
 <script src="client/src/app/categories/categoryController.js"></script>
+
+<!-- Sub Category -->
+<script src="client/src/app/subcategories/subcategory.module.js"></script>
+<script src="client/src/app/subcategories/subcategory.route.js"></script>
+<script src="client/src/app/subcategories/subcategoryController.js"></script>
 <!-- endinject -->
 
 
