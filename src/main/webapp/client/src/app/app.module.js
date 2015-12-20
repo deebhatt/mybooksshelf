@@ -20,7 +20,8 @@
         'app.reg',
         'app.product',
         'app.category',
-        'app.subcategory'/*,
+        'app.subcategory',
+        'app.cart'/*,
         'app.layout'*/
     ]);
 
