@@ -25,14 +25,14 @@ public class HomeScreenDAO extends BaseDAO{
 	
 	public List<Products> getAllProducts()
 	{
-		Query q = entityManager.createQuery("select distinct p from Products p join fetch p.category");
+		Query q = entityManager.createQuery("select distinct p from Products p join fetch p.category join fetch p.listImages");
 		return q.getResultList();
 	}
 	
 	public Products getProductbyName(String productName)
 			throws DBRecordNotFoundException {
 		try{
-			String query = "select e from " + Products.class.getSimpleName() + " e where e.productName = :productName";
+			String query = "select p from " + Products.class.getSimpleName() + " p join fetch p.category join fetch p.subcategorieslist where p.productName = :productName";
 			Query q = entityManager.createQuery(query);
 			q.setParameter("productName", productName);
 			return (Products) q.getSingleResult();

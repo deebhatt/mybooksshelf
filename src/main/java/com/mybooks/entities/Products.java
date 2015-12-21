@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -34,27 +36,36 @@ public class Products extends AuditableEntity implements BaseEntity{
 	@Column(name = "PRODUCT_LABEL", nullable = false, length = 35)
 	private String productLabel;
 	
-	@Column(name = "PRODUCT_CODE", nullable = false, length = 35)
+	@Column(name = "PRODUCT_CODE", nullable = false, length = 35, unique = true)
 	private String productCode;
 	
-	@Column(name = "PRODUCT_PRICE", precision = 8, scale = 2)
-	private BigDecimal Price;
+	@Column(name = "ORIGINAL_PRICE", precision = 8, scale = 2)
+	private BigDecimal OriginalPrice;
 	
-	@Column(name = "DISCOUNT_PERCENTAGE")
-	private String Discount;
+	@Column(name = "USEDBOOK_SELLINGPRICE", precision = 8, scale = 2)
+	private BigDecimal UsedBookSellingPrice;
 	
-	private long Quantity;
+	@Column(name = "NEWBOOK_SELLINGPRICE", precision = 8, scale = 2)
+	private BigDecimal NewBookSellingPrice;
+	
+	@Column(name = "USEDBOOK_DISCOUNT", precision = 4, scale = 2)
+	private BigDecimal UsedBookDiscount;
+	
+	@Column(name = "NEWBOOK_DISCOUNT", precision = 4, scale = 2)
+	private BigDecimal NewBookDiscount;
+	
+	private Long Quantity;
 	
 	private String Author;
 	
 	private String Publisher;
 	
-	private String Edition;
+	private int Edition;
 	
 	private String Description;
 	
-	@Column(name = "PRODUCT_IMAGE_URL")
-	private String Images;
+	@OneToMany(mappedBy = "productType", fetch=FetchType.EAGER)
+	private List<ProductImages> listImages;
 	
 	private String ProductAttributes;
 	
@@ -104,27 +115,51 @@ public class Products extends AuditableEntity implements BaseEntity{
 		this.productCode = productCode;
 	}
 
-	public BigDecimal getPrice() {
-		return Price;
+	public BigDecimal getOriginalPrice() {
+		return OriginalPrice;
 	}
 
-	public void setPrice(BigDecimal price) {
-		Price = price;
+	public void setOriginalPrice(BigDecimal originalPrice) {
+		OriginalPrice = originalPrice;
 	}
 
-	public String getDiscount() {
-		return Discount;
+	public BigDecimal getUsedBookSellingPrice() {
+		return UsedBookSellingPrice;
 	}
 
-	public void setDiscount(String discount) {
-		Discount = discount;
+	public void setUsedBookSellingPrice(BigDecimal usedBookSellingPrice) {
+		UsedBookSellingPrice = usedBookSellingPrice;
 	}
 
-	public long getQuantity() {
+	public BigDecimal getNewBookSellingPrice() {
+		return NewBookSellingPrice;
+	}
+
+	public void setNewBookSellingPrice(BigDecimal newBookSellingPrice) {
+		NewBookSellingPrice = newBookSellingPrice;
+	}
+
+	public BigDecimal getUsedBookDiscount() {
+		return UsedBookDiscount;
+	}
+
+	public void setUsedBookDiscount(BigDecimal usedBookDiscount) {
+		UsedBookDiscount = usedBookDiscount;
+	}
+
+	public BigDecimal getNewBookDiscount() {
+		return NewBookDiscount;
+	}
+
+	public void setNewBookDiscount(BigDecimal newBookDiscount) {
+		NewBookDiscount = newBookDiscount;
+	}
+
+	public Long getQuantity() {
 		return Quantity;
 	}
 
-	public void setQuantity(long quantity) {
+	public void setQuantity(Long quantity) {
 		Quantity = quantity;
 	}
 
@@ -144,11 +179,11 @@ public class Products extends AuditableEntity implements BaseEntity{
 		Publisher = publisher;
 	}
 
-	public String getEdition() {
+	public int getEdition() {
 		return Edition;
 	}
 
-	public void setEdition(String edition) {
+	public void setEdition(int edition) {
 		Edition = edition;
 	}
 
@@ -160,12 +195,12 @@ public class Products extends AuditableEntity implements BaseEntity{
 		Description = description;
 	}
 
-	public String getImages() {
-		return Images;
+	public List<ProductImages> getListImages() {
+		return listImages;
 	}
 
-	public void setImages(String images) {
-		Images = images;
+	public void setListImages(List<ProductImages> listImages) {
+		this.listImages = listImages;
 	}
 
 	public String getProductAttributes() {

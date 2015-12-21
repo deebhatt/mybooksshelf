@@ -3,9 +3,9 @@
     <div class="row">
         <div class="breadcrumbDiv col-lg-12">
             <ul class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="category.html">MEN COLLECTION</a></li>
-                <li><a href="sub-category.html">TSHIRT</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#/{{vm.product.category.categoryName}}">{{vm.product.category.categoryLabel}}</a></li>
+                <li><a href="#/{{vm.product.category.categoryName}}/{{vm.product.subcategory[0].subcategoryName}}">{{vm.product.subcategory[0].subcategoryLabel}}</a></li>
                 <li class="active">{{vm.product.productLabel}}</li>
             </ul>
         </div>
@@ -17,12 +17,12 @@
             <!-- product Image and Zoom -->
             <div class="main-image sp-wrap col-lg-12 no-padding">
             
-                <a ng-href="{{vm.product.images}}"><img
-                		ng-src="{{vm.product.images}}" class="img-responsive" alt="img"></a>
+                <a ng-href="{{vm.product.productImages[0].imageUrl}}"><img
+                		ng-src="{{vm.product.productImages[0].imageUrl}}" class="img-responsive" alt="img"></a>
                 <a ng-href="http://res.cloudinary.com/mybooksshelf/image/upload/v1443953433/disxelr7redgzmoflqmk.jpg"><img
-                        ng-src="{{vm.product.images}}" class="img-responsive" alt="img"></a>
-                <a ng-href="{{vm.product.images}}"><img
-                        ng-src="{{vm.product.images}}" class="img-responsive" alt="img"></a></div>
+                        ng-src="{{vm.product.productImages[0].imageUrl}}" class="img-responsive" alt="img"></a>
+                <a ng-href="{{vm.product.productImages[0].imageUrl}}"><img
+                        ng-src="{{vm.product.productImages[0].imageUrl}}" class="img-responsive" alt="img"></a></div>
         </div>
         <!--/ left column end -->
 
@@ -38,7 +38,7 @@
                             class="fa fa-star-o "></i></span> <span class="ratingInfo"> <span> / </span> <a
                             data-target="#modal-review" data-toggle="modal"> Write a review</a> </span></p>
                 </div>
-                <div class="product-price"><span class="price-sales">&#8377;{{vm.product.price}}</span> <span class="price-standard">&#8377;0</span>
+                <div class="product-price"><span class="price-sales">&#8377;{{vm.product.usedBookSellingPrice}}</span> <span class="price-standard">&#8377;{{vm.product.originalPrice}}</span>
                 </div>
                 <div class="details-description">
                     <p>{{vm.product.productName}}</p>

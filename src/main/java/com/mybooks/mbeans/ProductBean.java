@@ -1,6 +1,7 @@
 package com.mybooks.mbeans;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -17,15 +18,25 @@ public class ProductBean {
 	
 	private String productCode;
 	
-	private BigDecimal Price;
+	private BigDecimal OriginalPrice;
 	
-	private long Quantity;
+	private BigDecimal UsedBookSellingPrice;
+	
+	private BigDecimal NewBookSellingPrice;
+	
+	private BigDecimal UsedBookDiscount;
+	
+	private BigDecimal NewBookDiscount;
+	
+	private List<ProductImageBean> productImages;
+	
+	private Long Quantity;
 	
 	private String Author;
 	
 	private String Publisher;
 	
-	private String Edition;
+	private int Edition;
 	
 	private String Description;
 	
@@ -34,6 +45,8 @@ public class ProductBean {
 	private String ProductAttributes;
 	
 	private CategoryBean category;
+	
+	private List<SubCategoryBean> subcategory;
 
 	public Long getId() {
 		return id;
@@ -67,19 +80,59 @@ public class ProductBean {
 		this.productCode = productCode;
 	}
 
-	public BigDecimal getPrice() {
-		return Price;
+	public BigDecimal getOriginalPrice() {
+		return OriginalPrice;
 	}
 
-	public void setPrice(BigDecimal price) {
-		Price = price;
+	public void setOriginalPrice(BigDecimal originalPrice) {
+		OriginalPrice = originalPrice;
 	}
 
-	public long getQuantity() {
+	public BigDecimal getUsedBookSellingPrice() {
+		return UsedBookSellingPrice;
+	}
+
+	public void setUsedBookSellingPrice(BigDecimal usedBookSellingPrice) {
+		UsedBookSellingPrice = usedBookSellingPrice;
+	}
+
+	public BigDecimal getNewBookSellingPrice() {
+		return NewBookSellingPrice;
+	}
+
+	public void setNewBookSellingPrice(BigDecimal newBookSellingPrice) {
+		NewBookSellingPrice = newBookSellingPrice;
+	}
+
+	public BigDecimal getUsedBookDiscount() {
+		return UsedBookDiscount;
+	}
+
+	public void setUsedBookDiscount(BigDecimal usedBookDiscount) {
+		UsedBookDiscount = usedBookDiscount;
+	}
+
+	public BigDecimal getNewBookDiscount() {
+		return NewBookDiscount;
+	}
+
+	public void setNewBookDiscount(BigDecimal newBookDiscount) {
+		NewBookDiscount = newBookDiscount;
+	}
+
+	public List<ProductImageBean> getProductImages() {
+		return productImages;
+	}
+
+	public void setProductImages(List<ProductImageBean> productImages) {
+		this.productImages = productImages;
+	}
+
+	public Long getQuantity() {
 		return Quantity;
 	}
 
-	public void setQuantity(long quantity) {
+	public void setQuantity(Long quantity) {
 		Quantity = quantity;
 	}
 
@@ -99,11 +152,11 @@ public class ProductBean {
 		Publisher = publisher;
 	}
 
-	public String getEdition() {
+	public int getEdition() {
 		return Edition;
 	}
 
-	public void setEdition(String edition) {
+	public void setEdition(int edition) {
 		Edition = edition;
 	}
 
@@ -135,8 +188,17 @@ public class ProductBean {
 		return category;
 	}
 
+
 	public void setCategory(CategoryBean category) {
 		this.category = category;
+	}
+
+	public List<SubCategoryBean> getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(List<SubCategoryBean> subcategory) {
+		this.subcategory = subcategory;
 	}
 
 }
