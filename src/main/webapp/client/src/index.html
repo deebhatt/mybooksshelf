@@ -201,7 +201,7 @@
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only"> Toggle navigation </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span> <span class="icon-bar"> </span></button>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-cart"><i class="fa fa-shopping-cart colorWhite"> </i> <span class="cartRespons colorWhite"> Cart (Rs.210.00) </span></button>
-				<a class="navbar-brand " href="#"> <img src="client/src/images/logo.png" alt="MyBooksShelf"> </a>
+				<a class="navbar-brand " ng-href="#/"> <img src="client/src/images/logo.png" alt="MyBooksShelf"> </a>
 
 				<!-- this part for mobile -->
 				<!-- <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
@@ -303,11 +303,11 @@
 							<li class="megamenu-content">
 
 								<!-- megamenu-content -->
-								<ul class="col-lg-2  col-sm-2 col-md-2  unstyled" ng-repeat = "categories in categoriesArray">
+								<ul class="col-lg-2  col-sm-2 col-md-2  unstyled" ng-repeat = "categories in menu.categoriesArray">
 									<li>
-										<p><a ng-href="#/{{categories.categoryName}}"><strong> {{categories.categoryLabel}} </strong></a> </p>
+										<p><a ui-sref="category-detail({ categoryName : categories.categoryName })"><strong> {{categories.categoryLabel}} </strong></a> </p>
 									</li>
-									<li ng-repeat = "subCat in categories.listofsubcategories"><a ng-href="#/{{categories.categoryName}}/{{subCat.subcategoryName}}"> {{subCat.subcategoryLabel}} </a></li>
+									<li ng-repeat = "subCat in categories.listofsubcategories"><a ui-sref="subcategory-detail({ categoryName : categories.categoryName, subcategoryName : subCat.subcategoryName })"> {{subCat.subcategoryLabel}} </a></li>
 								</ul>
 							</li>
 						</ul>
@@ -336,15 +336,15 @@
     <!-- Search End -->		
 
 				<!--- this part will be hidden for mobile version -->
-				<div class="nav navbar-nav navbar-right hidden-xs" ng-controller="cartController">
+				<div class="nav navbar-nav navbar-right hidden-xs" ng-controller="cartController as cc">
 					<div class="dropdown  cartMenu">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-shopping-cart"> </i> <span class="cartRespons"> Cart () </span> <b class="caret"> </b> </a>
+						<a ui-sref="cart-details" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-shopping-cart"> </i> <span class="cartRespons"> Cart ({{cc.cartData.length}}) </span></b> </a>
 
-						<div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 ">
+						<!-- <div class="dropdown-menu col-lg-5 col-xs-12 col-md-5 ">
 							<div class="w100 miniCartTable scroll-pane">
 								<table>
 									<tbody>
-										<tr class="miniCartProduct" ng-repeat="data in cartData.items">
+										<tr class="miniCartProduct" ng-repeat="data in vm.cartData()">
 											<td style="width:20%" class="miniCartProductThumb">
 												<div>
 													<a href="product-details.html"> <img ng-src="{{data.image}}" alt="img">
@@ -356,23 +356,23 @@
 													<h4><a href="product-details.html">{{data.label}}</a></h4>
 													<span class="size"> </span>
 
-													<div class="price"><span>{{data.price}}</span></div>
+													<div class="price"><span>&#8377;{{data.price}}</span></div>
 												</div>
 											</td>
 											<td style="width:10%" class="miniCartQuantity"><a> X 1 </a></td>
-											<td style="width:15%" class="miniCartSubtotal"><span> {{data.price}} </span></td>
-											<td style="width:5%" class="delete"><a> x </a></td>
+											<td style="width:15%" class="miniCartSubtotal"><span>&#8377; {{data.price}} </span></td>
+											<td style="width:5%" class="delete"><a> Remove </a></td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-							<!--/.miniCartTable-->
+							/.miniCartTable
 
 							<div class="miniCartFooter text-right">
 								<h3 class="text-right subtotal"> Subtotal: $210 </h3>
 								<a class="btn btn-sm btn-danger" href="cart.html"> <i class="fa fa-shopping-cart"> </i> VIEW CART </a><a class="btn btn-sm btn-primary"> CHECKOUT </a>
 							</div>
-							<!--/.miniCartFooter-->
+							/.miniCartFooter -->
 
 						</div>
 						<!--/.dropdown-menu-->
@@ -531,10 +531,10 @@
 
 	<script src="client/src/bower_components/jquery/dist/jquery.min.js"></script>
 
-	<script src="client/src/bower_components/angular/angular.min.js"></script>
+	<!-- <script src="client/src/bower_components/angular/angular.min.js"></script>
 	<script src="client/src/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="client/src/bower_components/angular-animate/angular-animate.min.js"></script>
-	<script src="client/src/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+	<script src="client/src/bower_components/angular-sanitize/angular-sanitize.min.js"></script> -->
 	<script src="client/src/bower_components/toastr/toastr.min.js"></script>
 	<script src="client/src/assets/bootstrap/js/bootstrap.min.js"></script>
 	<script>
@@ -545,6 +545,13 @@
 			$('#modalAds').removeClass('hide');
 		});
 	</script>
+	
+	<!-- Angular Cookies -->
+	<script src="https://code.angularjs.org/1.4.0/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+	<script src="https://code.angularjs.org/1.4.0/angular-animate.min.js"></script>
+	<script src="https://code.angularjs.org/1.4.0/angular-sanitize.min.js"></script>
+	<script src="https://code.angularjs.org/1.4.0/angular-cookies.js"></script>
 
 	<!-- include jqueryCycle plugin -->
 	<script src="client/src/assets/js/jquery.cycle2.min.js"></script>
@@ -640,7 +647,10 @@
 <script src="client/src/app/widgets/registrationController.js"></script>
 
 <!-- Cart -->
-<script src="client/src/app/widgets/cartController.js"></script>
+<script src="client/src/app/cart/cart.module.js"></script>
+<script src="client/src/app/cart/cart.route.js"></script>
+<script src="client/src/app/cart/CartService.js"></script>
+<script src="client/src/app/cart/cartController.js"></script>
 
 <!-- Products -->
 <script src="client/src/app/product_details/product.module.js"></script>

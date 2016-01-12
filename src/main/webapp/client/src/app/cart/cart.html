@@ -1,0 +1,129 @@
+<div class="container main-container headerOffset">
+    <div class="row">
+        <div class="breadcrumbDiv col-lg-12">
+            <ul class="breadcrumb">
+                <li><a ng-href="#/">Home</a></li>
+                <!-- <li><a href="category.html">Category</a></li> -->
+                <li class="active">Cart</li>
+            </ul>
+        </div>
+    </div>
+    <!--/.row-->
+
+    <!--/.row-->
+	<div ng-if="vm.cartData.length == '0' || vm.cartData == null"><pre>No products added</pre></div>
+	<div ng-if="vm.cartData.length > '0'">
+	<div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-7 col-xs-6 col-xxs-12 text-center-xs">
+            <h1 class="section-title-inner"><span><i
+                    class="glyphicon glyphicon-shopping-cart"></i> Shopping cart </span></h1>
+        </div>
+    </div>
+    <div class="row"><!-- ng-controller="cartController as cc" -->
+        <div class="col-lg-9 col-md-9 col-sm-7">
+            <div class="row userInfo">
+                <div class="col-xs-12 col-sm-12">
+                	<!-- <div ng-if="vm.cartData.length == '0'"><pre>No products added</pre></div> -->
+                    <div class="cartContent w100">
+                        <table class="cartTable table-responsive" style="width:100%" >
+                            <tbody>
+
+                            <tr class="CartProduct cartTableHeader">
+                                <td style="width:15%"> Product</td>
+                                <td style="width:40%">Details</td>
+                                <td style="width:10%" class="delete">&nbsp;</td>
+                                <td style="width:10%">QTY</td>
+                                <td style="width:10%">Discount</td>
+                                <td style="width:15%">SubTotal</td>
+                            </tr>
+
+                            <tr class="CartProduct" ng-repeat="data in vm.cartData">
+                                <td class="CartProductThumb">
+                                    <div><a ui-sref="product-detail({ productName : data.productName })"><img ng-src="{{data.image}}" alt="img"></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="CartDescription">
+                                        <h4><a ui-sref="product-detail({ productName : data.productName })">{{data.productLabel}}</a></h4>
+                                        <span class="size"></span>
+
+                                        <div class="price"><span>&#8377;{{data.price}}</span></div><p>You save:50(37%)</p>
+                                    </div>
+                                </td>
+                                <td class="delete"><a title="Delete" ng-click="vm.removeProduct(data.p_id)"> <i
+                                        class="glyphicon glyphicon-trash fa-2x"></i></a></td>
+                                <td><input class="quanitySniper" type="number" ng-model="vm.quantity" /></td>
+                                <td>Discount</td>
+                                <td class="price">{{vm.quantity * data.price}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--cartContent-->
+
+                    <div class="cartFooter w100">
+                        <div class="box-footer">
+                            <div class="pull-right">
+                                <a ng-href="#/" class="btn btn-primary btn-lg btn-block"> <i
+                                    class="fa fa-arrow-left"></i> &nbsp; Continue shopping </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ cartFooter -->
+				</div>
+                
+            </div>
+            <!--/row end-->
+        </div>
+        
+        <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+            <div class="contentBox">
+                <div class="w100 costDetails">
+                    <div class="table-block" id="order-detail-content"><a class="btn btn-primary btn-lg btn-block "
+                                                                          title="checkout" ui-sref="cart-checkout-0"
+                                                                          style="margin-bottom:20px"> Proceed to
+                        checkout &nbsp; <i class="fa fa-arrow-right"></i> </a>
+
+                        <div class="w100 cartMiniTable">
+                            <table id="cart-summary" class="std table">
+                                <tbody>
+                                <tr>
+                                    <td>Total products</td>
+                                    <td class="price">3 Products</td>
+                                </tr>
+                                <tr style="">
+                                    <td>Shipping</td>
+                                    <td class="price"><span class="success">Free shipping!</span></td>
+                                </tr>
+                                <tr>
+                                    <td> Total</td>
+                                    <td class=" site-color" id="total-price">&#8377; 500</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="input-append couponForm">
+                                            <input class="col-lg-8" id="appendedInputButton" type="text"
+                                                   placeholder="Coupon code">
+                                            <button class="col-lg-4 btn btn-success" type="button" ng-click="vm.getallOrders()">Apply!</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End popular -->
+        </div>
+        <!--/rightSidebar-->
+
+    </div>
+    <!--/row-->
+    </div>
+    <div style="clear:both"></div>
+</div>
+<!-- /.main-container -->
+<div class="gap"></div>

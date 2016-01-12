@@ -17,5 +17,7 @@ public class ApplicationConstants {
 	public static final String ORDER_STATUS_PENDING = "P";
 
 	public static final String ORDER_STATUS_COMPLETED = "C";
+	
+	public static final String EMAIL_TOKEN_VERIFIED = "V";
 
 }

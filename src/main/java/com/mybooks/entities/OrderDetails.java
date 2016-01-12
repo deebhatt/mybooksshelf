@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -25,6 +27,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "ORDER_DETAILS")
 @SequenceGenerator(name = "SEQ_ORDER_DETAILS")
+@Access(AccessType.FIELD)
 public class OrderDetails extends AuditableEntity implements BaseEntity, Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -57,9 +60,9 @@ public class OrderDetails extends AuditableEntity implements BaseEntity, Seriali
 	private UserMaster customerDetails;
 	
 	@Column(name = "ORDER_STATUS", length = 2)
-	private String status;
+	private String orderStatus;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="SHIPPING_ADDRESS")
 	private Address shippingAddress;
 	
@@ -114,12 +117,12 @@ public class OrderDetails extends AuditableEntity implements BaseEntity, Seriali
 		this.customerDetails = customerDetails;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getorderStatus() {
+		return orderStatus;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setorderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public Address getShippingAddress() {

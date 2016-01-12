@@ -40,8 +40,6 @@ public class ProductBean {
 	
 	private String Description;
 	
-	private String Images;
-	
 	private String ProductAttributes;
 	
 	private CategoryBean category;
@@ -166,14 +164,6 @@ public class ProductBean {
 
 	public void setDescription(String description) {
 		Description = description;
-	}
-
-	public String getImages() {
-		return Images;
-	}
-
-	public void setImages(String images) {
-		Images = images;
 	}
 
 	public String getProductAttributes() {

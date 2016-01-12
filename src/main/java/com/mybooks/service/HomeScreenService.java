@@ -61,6 +61,7 @@ public class HomeScreenService {
 		for(Products products : listall)
 		{
 			ProductBean productbean = new ProductBean();
+			productbean.setId(products.getId());
 			productbean.setProductName(products.getProductName());
 			productbean.setProductLabel(products.getProductLabel());
 			productbean.setOriginalPrice(products.getOriginalPrice());
@@ -95,6 +96,7 @@ public class HomeScreenService {
 		try{
 			Products getproduct = screendao.getProductbyName(productName);
 			product = new ProductBean();
+			product.setId(getproduct.getId());
 			product.setAuthor(getproduct.getAuthor());
 			product.setDescription(getproduct.getDescription());
 			product.setEdition(getproduct.getEdition());

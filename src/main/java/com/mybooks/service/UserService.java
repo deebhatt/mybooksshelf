@@ -31,6 +31,7 @@ public class UserService {
 		}
 	}
 
+	@Transactional(rollbackFor = DAOException.class)
 	public void saveUser(UserMaster userMaster) throws UserServiceException {
 		try {
 			userDAO.persist(userMaster);
@@ -62,6 +63,7 @@ public class UserService {
 		return user;
 	}
 	
+	@Transactional(rollbackFor = DAOException.class)
 	public void saveRole(Roles roles) throws UserServiceException {
 		try {
 			userDAO.persist(roles);

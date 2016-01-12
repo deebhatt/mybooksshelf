@@ -13,9 +13,9 @@
 	function getStates() {
 		return [
 			{
-				state: '/:categoryName',
+				state: 'category-detail',
 				config: {
-					url: '/:categoryName',
+					url: '/category/:categoryName/',
 					views: {
 						'mainContent': {
 							templateUrl: 'client/src/app/categories/category.html',

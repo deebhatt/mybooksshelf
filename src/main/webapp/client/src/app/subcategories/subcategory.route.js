@@ -13,7 +13,7 @@
 	function getStates() {
 		return [
 			{
-				state: '/:categoryName/:subcategoryName',
+				state: 'subcategory-detail',
 				config: {
 					url: '/:categoryName/:subcategoryName',
 					views: {

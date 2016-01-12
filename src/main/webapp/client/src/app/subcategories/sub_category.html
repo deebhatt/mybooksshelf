@@ -6,7 +6,7 @@
         <div class="breadcrumbDiv col-lg-12">
             <ul class="breadcrumb">
                 <li><a ng-href="#">Home</a></li>
-                <li><a ng-href="#/{{vm.categoryName}}">{{vm.categoryName | uppercase}}</a></li>
+                <li><a ui-sref="category-detail({ categoryName : vm.categoryName })">{{vm.categoryName | uppercase}}</a></li>
                 <li class="active">{{vm.subcategoryName | uppercase}}</li>
             </ul>
         </div>
@@ -29,13 +29,13 @@
                         </h4>
                     </div>
 
-                    <div id="collapseCategory" class="panel-collapse collapse in" ng-controller = "MenuController as menu">
+                    <div id="collapseCategory" class="panel-collapse collapse in" ng-controller = "MenuController as vm">
                         <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked tree" ng-repeat = "categories in categoriesArray">
-                                <li class="active dropdown-tree open-tree"><a class="dropdown-tree-a" ng-href="#/{{categories.categoryName}}"> <span
+                            <ul class="nav nav-pills nav-stacked tree" ng-repeat = "categories in vm.categoriesArray">
+                                <li class="active dropdown-tree open-tree"><a class="dropdown-tree-a" ui-sref="category-detail({ categoryName : categories.categoryName })"> <span
                                         class="badge pull-right"></span> {{categories.categoryLabel}} </a>
                                     <ul class="category-level-2 dropdown-menu-tree" ng-repeat="subCat in categories.listofsubcategories">
-                                        <li class="dropdown-tree open-tree"><a class="dropdown-tree-a" ng-href="#/{{categories.categoryName}}/{{subCat.subcategoryName}}">
+                                        <li class="dropdown-tree open-tree"><a class="dropdown-tree-a" ui-sref="subcategory-detail({ categoryName : categories.categoryName, subcategoryName : subCat.subcategoryName })">
                                             {{subCat.subcategoryLabel}}</a>
                                             <ul class="category-level-2 dropdown-menu-tree">
                                                 <li><a href="">First Year</a></li>
@@ -258,8 +258,8 @@
                             </div>
                             <span class="size"> </span></div>
                         <div class="price"><span>&#8377;{{product.usedBookSellingPrice}}</span></div>
-                        <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
-                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div>
+                        <!-- <div class="action-control"><a class="btn btn-primary"> <span class="add2cart"><i
+                                class="glyphicon glyphicon-shopping-cart"> </i> Add to cart </span> </a></div> -->
                     </div>
                 </div>
                 <!--/.item-->

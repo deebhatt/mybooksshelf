@@ -13,7 +13,7 @@
 	function getStates() {
 		return [
 			{
-				state: '/product/:productName',
+				state: 'product-detail',
 				config: {
 					url: '/product/:productName',
 					views: {

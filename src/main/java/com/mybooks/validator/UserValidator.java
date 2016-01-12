@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.mybooks.commons.ResponseMessage;
 import com.mybooks.entities.Roles;
 import com.mybooks.enums.USER_PROFILE_ERR_CODES;
 import com.mybooks.enums.USER_ROLES;
@@ -47,10 +46,11 @@ public class UserValidator {
 	 * @param encryptedDBPassword
 	 * @return
 	 * @throws UserProfileValidationException
+	 * @throws UserServiceException 
 	 */
 	public void isUserMasterDataValid(UserFormBean userFormBean,
 			VALIDATION_MODE mode, String encryptedDBPassword)
-			throws UserProfileValidationException {
+			throws UserProfileValidationException, UserServiceException {
 		switch (mode) {
 		case SAVE:
 			validateSave(userFormBean);
@@ -88,7 +88,7 @@ public class UserValidator {
 	}
 
 	private void validateSave(UserFormBean userFormBean)
-			throws UserProfileValidationException {
+			throws UserProfileValidationException, UserServiceException {
 		validateFirstNameMandatory(userFormBean);
 		validateEmailMandatory(userFormBean);
 		validateConfirmEmailMandatory(userFormBean);
@@ -190,27 +190,15 @@ public class UserValidator {
 	}
 	
 	private void setUsersRole(UserFormBean userFormBean)
-			throws UserProfileValidationException {
-			Roles assignRole = null;
+			throws UserServiceException {
 			try {
-				assignRole = userService.findRoleByName(USER_ROLES.ROLE_USER.toString());
-			} catch (RoleNotFoundException e) {
-				LOG.debug("Assigned Role doesnot exist");
-			}
-			try{
-				if(assignRole == null){
-					assignRole = new Roles();
-					assignRole.setRoleName(USER_ROLES.ROLE_USER.toString());
-					userService.saveRole(assignRole);
-				}
-				
-			} catch (UserServiceException e) {
-				LOG.error("There was a technical error while registering", e);
-			}
-			finally{
+				Roles assignRole = userService.findRoleByName(USER_ROLES.ROLE_USER.toString());
 				List<Roles> listOfRoles = new ArrayList<Roles>();
 				listOfRoles.add(assignRole);
 				userFormBean.setRoles(listOfRoles);
+			} catch (RoleNotFoundException e) {
+				LOG.error("Assigned Role doesnot exist");
+				throw new UserServiceException(e);
 			}
 	}
 }

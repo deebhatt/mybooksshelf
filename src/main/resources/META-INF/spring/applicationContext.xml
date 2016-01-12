@@ -43,6 +43,7 @@
         The most commonly used annotation is @Autowired, which instructs Spring to
         dependency inject an object into your class.
     -->
+    <context:annotation-config />
     
     <context:component-scan base-package="com.mybooks">
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
@@ -69,14 +70,14 @@
     	<property name="location" value="classpath:META-INF/spring/application.properties"/>
 	</bean>
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.mandrillapp.com"/>
-	    <property name="port" value="587"/>
-	    <property name="username" value="deepakbhatt1990@gmail.com"/>
-	    <property name="password" value="yourpassword"/>
+	    <property name="username" value=""/>
+	    <property name="password" value=""/>
 	    <property name="javaMailProperties">
 	        <props>
 	            <prop key="mail.smtp.auth">true</prop>
-	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.smtp.host">smtp.mandrillapp.com</prop>
+	            <prop key="mail.smtp.port">587</prop>
+	            <!-- <prop key="mail.smtp.starttls.enable">true</prop> -->
 	        </props>
 	    </property>
     </bean>

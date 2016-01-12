@@ -2,10 +2,11 @@ package com.mybooks.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,11 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.mybooks.enums.STATE_LIST;
-
 @Entity
 @Table(name = "USERS_ADDRESS")
 @SequenceGenerator(name = "SEQ_USER_ADDRESS")
+@Access(AccessType.FIELD)
 public class Address extends AuditableEntity implements BaseEntity, Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +27,7 @@ public class Address extends AuditableEntity implements BaseEntity, Serializable
 	@Column(name = "ADDRESS_ID", unique = true, nullable = false)
 	private Long addressId;
 	
-	@Column(name = "FIRST_NAME", length = 70)
+	@Column(name = "FULL_NAME", length = 70)
 	private String fullName;
 	
 	@Column(name = "ADDRESS_LINE1", length = 120)
@@ -40,8 +40,7 @@ public class Address extends AuditableEntity implements BaseEntity, Serializable
 	private String townOrCity;
 	
 	@Column(name = "STATE", length = 35)
-	@Enumerated(EnumType.STRING)
-	private STATE_LIST state;
+	private String state;
 	
 	@Column(name = "PINCODE")
 	private int pinCode;
@@ -105,11 +104,11 @@ public class Address extends AuditableEntity implements BaseEntity, Serializable
 		this.townOrCity = townOrCity;
 	}
 
-	public STATE_LIST getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(STATE_LIST state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 

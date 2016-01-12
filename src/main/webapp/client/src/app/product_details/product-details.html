@@ -3,9 +3,9 @@
     <div class="row">
         <div class="breadcrumbDiv col-lg-12">
             <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#/{{vm.product.category.categoryName}}">{{vm.product.category.categoryLabel}}</a></li>
-                <li><a href="#/{{vm.product.category.categoryName}}/{{vm.product.subcategory[0].subcategoryName}}">{{vm.product.subcategory[0].subcategoryLabel}}</a></li>
+                <li><a ng-href="#/">Home</a></li>
+                <li><a ui-sref="category-detail({ categoryName : vm.product.category.categoryName })">{{vm.product.category.categoryLabel}}</a></li>
+                <li><a ui-sref="subcategory-detail({ categoryName : vm.product.category.categoryName, subcategoryName : vm.product.subcategory[0].subcategoryName })">{{vm.product.subcategory[0].subcategoryLabel}}</a></li>
                 <li class="active">{{vm.product.productLabel}}</li>
             </ul>
         </div>
@@ -45,9 +45,8 @@
                 </div>
                 <div class="color-details"><span class="selected-color"><strong>COLOR</strong></span>
                     <ul class="swatches Color">
-                        <li class="selected"><a style="background-color:#f1f40e"> </a></li>
-                        <li><a style="background-color:#adadad"> </a></li>
-                        <li><a style="background-color:#4EC67F"> </a></li>
+                        <li class="selected"><a style="background-color:#f1f40e">NEW</a></li>
+                        <li><a style="background-color:#adadad">USED</a></li>
                     </ul>
                 </div>
                 <!--/.color-details-->
@@ -88,9 +87,8 @@
                 <div class="cart-actions">
                     <div class="addto row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <button onclick="productAddToCartForm.submit(this);"
-                                    class="button btn-block btn-cart cart first" title="Add to Cart" type="button">Add
-                                to Cart
+                            <button  ng-disabled="vm.setdisabled" ng-click="vm.addToCart(vm.product)"
+                                    class="button btn-block btn-cart cart first" title="Add to Cart" type="button">{{vm.addTocartbutton}}
                             </button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><a class="link-wishlist wishlist btn-block ">Add
