@@ -39,5 +39,17 @@ public class UserDAO extends BaseDAO{
 			throw new DBRecordNotFoundException(e);
 		}
 	}
+	
+	public UserMaster findByMobileNo(String mobileNo)
+			throws DBRecordNotFoundException{
+		try {
+			Query q = entityManager
+					.createQuery("select e from UserMaster e where e.mobileNumber = :mobileNo");
+			q.setParameter("mobileNo", mobileNo);
+			return (UserMaster) q.getSingleResult();
+		} catch (NoResultException e) {
+			throw new DBRecordNotFoundException(e);
+		}
+	}
 
 }

@@ -26,12 +26,37 @@ public class GuestUserDAO extends BaseDAO{
 		}
 	}
 	
+	public GuestUser findUserByMobileNo(String mobileNo)throws DBRecordNotFoundException
+	{
+		try {
+			Query q = entityManager
+					.createQuery("select e from GuestUser e where e.mobileNumber = :mobileNo");
+			q.setParameter("mobileNo", mobileNo);
+			return (GuestUser) q.getSingleResult();
+		} catch (NoResultException e) {
+			throw new DBRecordNotFoundException(e);
+		}
+	}
+	
 	public GuestUser findUserByEmailandToken(String email, Long token)throws DBRecordNotFoundException
 	{
 		try {
 			Query q = entityManager
 					.createQuery("select e from GuestUser e where e.email = :email and e.token = :token");
 			q.setParameter("email", email);
+			q.setParameter("token", token);
+			return (GuestUser) q.getSingleResult();
+		} catch (NoResultException e) {
+			throw new DBRecordNotFoundException(e);
+		}
+	}
+	
+	public GuestUser findUserByMobileNoandToken(String mobileNo, Long token)throws DBRecordNotFoundException
+	{
+		try {
+			Query q = entityManager
+					.createQuery("select e from GuestUser e where e.mobileNumber = :mobileNo and e.token = :token");
+			q.setParameter("mobileNo", mobileNo);
 			q.setParameter("token", token);
 			return (GuestUser) q.getSingleResult();
 		} catch (NoResultException e) {

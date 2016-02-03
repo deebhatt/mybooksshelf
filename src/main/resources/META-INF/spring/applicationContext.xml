@@ -81,6 +81,11 @@
 	        </props>
 	    </property>
     </bean>
+  	<bean id="smsSender" class="com.mybooks.service.sms.SMSLeadsSenderImpl">
+    	<property name="userName" value=""/>
+    	<property name="password" value=""/>
+    	<property name="senderid" value=""/>
+	</bean> 
     
     <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 

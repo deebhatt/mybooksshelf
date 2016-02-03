@@ -21,7 +21,9 @@
         'app.product',
         'app.category',
         'app.subcategory',
-        'app.cart'/*,
+        'app.cart',
+        'app.mainSearch',
+        'app.errorPage'/*,
         'app.layout'*/
     ]);
 

@@ -2,14 +2,11 @@
     'use strict';
     angular.module('app.widgets').controller('MenuController', MenuController);
     /*ng-inject*/
-    function MenuController($http) {
+    function MenuController($http, MenuService) {
     		var vm = this;
-    	
-    		$http.get("getCategoriesandSubCategories")
-				.then(function (response) {
-					vm.categoriesArray = response.data;
-				}).catch(function (msg) {
-
-				});
+    		
+    		MenuService.getAllCategories().then(function(data){
+    			vm.categoriesArray = data;
+    		});
     }
 })();

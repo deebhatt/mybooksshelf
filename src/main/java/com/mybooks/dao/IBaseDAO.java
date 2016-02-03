@@ -1,9 +1,9 @@
 package com.mybooks.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mybooks.entities.BaseEntity;
-
 import com.mybooks.exception.DAOException;
 
 public interface IBaseDAO {
@@ -18,5 +18,10 @@ public interface IBaseDAO {
 
 	public <T extends BaseEntity, X extends Long> T findById(
 			Class<? extends T> type, X id) throws DAOException;
+	
+	public <T extends BaseEntity> List<T> findByFilter(Class<? extends T> type,
+			Map<String, Object> criteria) throws DAOException;
+	
+	public <T extends BaseEntity> Long countAll(Class<? extends T> type) throws DAOException;
 
 }

@@ -5,6 +5,10 @@ public class ApplicationConstants {
 	public static final String EMAIL_VERIFIED_YES = "Y";
 
 	public static final String EMAIL_VERIFIED_NO = "N";
+	
+	public static final String MOBILENO_VERIFIED_YES = "Y";
+	
+	public static final String MOBILENO_VERIFIED_NO = "N";
 
 	public static final String USER_ACTIVATED = "A";
 

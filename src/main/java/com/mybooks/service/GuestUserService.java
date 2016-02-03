@@ -27,10 +27,15 @@ import com.mybooks.exception.DBRecordNotFoundException;
 import com.mybooks.exception.EmailNotFoundException;
 import com.mybooks.exception.EmailSenderServiceException;
 import com.mybooks.exception.RoleNotFoundException;
+import com.mybooks.exception.SmsSenderServiceException;
 import com.mybooks.exception.UserServiceException;
 import com.mybooks.service.email.EmailSenderService;
+import com.mybooks.service.sms.SMSLeadsMessage;
+import com.mybooks.service.sms.SMSSenderService;
+import com.mybooks.service.sms.SMSSenderServiceImpl;
 import com.mybooks.utility.EmailFormatter;
 import com.mybooks.utility.PropertiesUtil;
+import com.mybooks.utility.SMSFormatter;
 import com.mybooks.utility.SecurityUtil;
 
 @Service("guestuserService")
@@ -47,22 +52,25 @@ public class GuestUserService {
 	private EmailSenderService emailSender;
 	
 	@Inject
+	private SMSSenderService smsSender;
+	
+	@Inject
 	private UserService userService;
 	
 	@Transactional(rollbackFor=DAOException.class)
-	public ResponseMessage sendVerificationTokentoUser(String email)
+	public ResponseMessage sendVerificationTokentoUser(String mobileNo)
 	{
 		GuestUser guestuser = null;
-		int generateEmailToken = 0;
+		int generateToken = 0;
 		try {
 			int startValue = Integer.parseInt(PropertiesUtil.getProperty("email.token.start"));
 			int endValue = Integer.parseInt(PropertiesUtil.getProperty("email.token.end"));
-			generateEmailToken = SecurityUtil.generateRandomNumber(startValue, endValue);
+			generateToken = SecurityUtil.generateRandomNumber(startValue, endValue);
 			
-			guestuser = guestuserDAO.findUserByEmail(email);
+			guestuser = guestuserDAO.findUserByMobileNo(mobileNo);
 			//User already found so update the user
 			guestuser.setTokenCreatedDate(System.currentTimeMillis());
-			guestuser.setToken((long) generateEmailToken);
+			guestuser.setToken((long) generateToken);
 			guestuserDAO.update(guestuser);
 		} catch (DBRecordNotFoundException e) {
 			LOG.debug("Guest User Not Found, so create a new Guest User");
@@ -74,8 +82,8 @@ public class GuestUserService {
 		try {
 			if(guestuser == null) {
 				guestuser = new GuestUser();
-				guestuser.setEmail(email);
-				guestuser.setToken((long) generateEmailToken);
+				guestuser.setMobileNumber(mobileNo);
+				guestuser.setToken((long) generateToken);
 				guestuser.setTokenCreatedDate(System.currentTimeMillis());
 				guestuserDAO.persist(guestuser);
 			}
@@ -84,28 +92,40 @@ public class GuestUserService {
 			return new ResponseMessage(ResponseMessage.Type.danger,
 					"There was a technical error while adding Guest User. Please try again");
 		}
-		// Encode Email and currentmillis value
-		String cookieSecret = SecurityUtil.encodeValue(email);
+		// Encode MobileNumber
+		String cookieSecret = SecurityUtil.encodeValue(mobileNo);
 					
 		// SEND EMAIL NOTIFICATION
 		/*SimpleMailMessage message = EmailFormatter.generateTokenEmailMessage(String.valueOf(generateEmailToken), guestuser);
 		try {
 			emailSender.sendEmail(message);
 		} catch (EmailSenderServiceException e) {
-			LOG.warn("Errors while processing reset password", e);
+			LOG.error("Errors while sending COD token", e);
+			return new ResponseMessage(ResponseMessage.Type.danger,
+					"There was a technical error while sending Email. Please try again");
+		}*/
+		
+		//SEND SMS NOTIFICATION
+		/*SMSLeadsMessage message = SMSFormatter.generateTokenforCashOnDelivery(String.valueOf(generateToken), guestuser);
+		try {
+			smsSender.sendSMS(message);
+		} catch (SmsSenderServiceException e) {
+			LOG.error("Errors while sending COD token", e);
+			return new ResponseMessage(ResponseMessage.Type.danger,
+					 "There was a technical error while sending SMS. Please try again");
 		}*/
 		return new ResponseMessage(
 				ResponseMessage.Type.success,
-				"The token has been sent to the email.", cookieSecret);
+				"The token has been sent to the mobile.", cookieSecret);
 	}
 	
 	public ResponseMessage verifyGuestUSerToken(Long token, String cookieSecret)
 	{
 		//Decode the token value
-		String guestUserEmail = null;
+		String guestUserMobile = null;
 		if(!cookieSecret.equals("CookieNotFound"))
 		{
-			guestUserEmail = SecurityUtil.decodeValue(cookieSecret);
+			guestUserMobile = SecurityUtil.decodeValue(cookieSecret);
 		}
 		else
 		{
@@ -114,7 +134,7 @@ public class GuestUserService {
 		}
 		GuestUser user;
 		try {
-			user = guestuserDAO.findUserByEmailandToken(guestUserEmail, token);
+			user = guestuserDAO.findUserByMobileNoandToken(guestUserMobile, token);
 			Long expiretime = user.getTokenCreatedDate();
 			Long current = System.currentTimeMillis();
 			Long mins = TimeUnit.MILLISECONDS.toMinutes(current-expiretime);
@@ -126,9 +146,9 @@ public class GuestUserService {
 			}
 			else
 			{
-				if(!confirmUserisRegisterd(guestUserEmail))
+				if(!confirmUserisRegisterdwithMobileNo(guestUserMobile))
 				{
-					createGuestUser(guestUserEmail);
+					createGuestUserwithMobileNo(guestUserMobile);
 				}
 				return new ResponseMessage(
 						ResponseMessage.Type.success, "The token is valid");
@@ -143,7 +163,7 @@ public class GuestUserService {
 		}
 	}
 	
-	public void createGuestUser(String email) throws UserServiceException
+	public void createGuestUserwithEmail(String email) throws UserServiceException
 	{
 		try {
 			UserMaster user = new UserMaster();
@@ -164,12 +184,44 @@ public class GuestUserService {
 		}
 	}
 	
-	private boolean confirmUserisRegisterd(String guestUserEmail)
+	public void createGuestUserwithMobileNo(String mobileNo) throws UserServiceException
+	{
+		try {
+			UserMaster user = new UserMaster();
+			user.setMobileNumber(mobileNo);
+			user.setVerified(ApplicationConstants.MOBILENO_VERIFIED_YES);
+			user.setActive(ApplicationConstants.USER_DEACTIVATED);
+			Roles assignRole = userService.findRoleByName(USER_ROLES.ROLE_GUEST.toString());
+			List<Roles> listOfRoles = new ArrayList<Roles>();
+			listOfRoles.add(assignRole);
+			user.setListOfRoles(listOfRoles);
+			userService.saveUser(user);
+		} catch (RoleNotFoundException e) {
+			LOG.error("Assigned Role doesnot exist");
+			throw new UserServiceException(e);
+		} catch (UserServiceException e) {
+			LOG.error("There was a technical error while registering", e);
+			throw new UserServiceException(e);
+		}
+	}
+	
+	private boolean confirmUserisRegisterdwithEmail(String guestUserEmail)
 	{
 		try {
 			userService.findByEmail(guestUserEmail);
 			return true;
 		} catch (EmailNotFoundException e) {
+			LOG.debug("GuestUser not Found");
+			return false;
+		}
+	}
+	
+	private boolean confirmUserisRegisterdwithMobileNo(String guestUserMobileNo)
+	{
+		try {
+			userService.findByMobileNo(guestUserMobileNo);
+			return true;
+		} catch (DBRecordNotFoundException e) {
 			LOG.debug("GuestUser not Found");
 			return false;
 		}

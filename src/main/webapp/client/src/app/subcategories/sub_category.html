@@ -207,7 +207,7 @@
             <!--/.category-top-->
 
             <div class="w100 productFilter clearfix">
-                <p class="pull-left"> Showing <strong>12</strong> products </p>
+                <p class="pull-left"> Showing <strong>{{vm.products.length}}</strong> products </p>
 
                 <div class="pull-right ">
                     <div class="change-order pull-right">
@@ -267,21 +267,14 @@
             <!--/.categoryProduct || product content end-->
 
             <div class="w100 categoryFooter">
-                <div class="pagination pull-left no-margin-top">
-                    <ul class="pagination no-margin-top">
-                        <li><a href="#">«</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
-                </div>
-                <div class="pull-right pull-right  col-sm-4 col-xs-12 no-padding text-right text-left-xs">
-                    <p>Showing 1–450 of 12 results</p>
-                </div>
-            </div>
+	            <div class="pagination pull-left no-margin-top">
+	            	<uib-pagination total-items="vm.totalItems" items-per-page="vm.numPerPage" ng-model="vm.currentPage" ng-change="vm.pageChanged()" max-size="vm.maxSize">
+	            	</uib-pagination>
+			     </div>
+			     <div class="pull-right pull-right col-sm-4 col-xs-12 no-padding text-right text-left-xs">
+	                    <p>Showing {{(vm.currentPage-1)*(vm.numPerPage) + 1}}-{{vm.currentPage*vm.numPerPage}} of {{vm.totalItems}} results</p>
+	             </div>
+		     </div>
         </div>
         <!--/.categoryFooter-->
     </div>

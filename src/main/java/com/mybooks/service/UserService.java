@@ -79,5 +79,13 @@ public class UserService {
 			throw new RoleNotFoundException(e);
 		}
 	}
+	
+	public UserMaster findByMobileNo(String MobileNo) throws DBRecordNotFoundException  {
+		try {
+			return userDAO.findByEmail(MobileNo);
+		} catch (DBRecordNotFoundException e) {
+			throw new DBRecordNotFoundException(e);
+		}
+	}
 
 }

@@ -34,9 +34,9 @@
     		vm.isPayementMethodEnable = true;
     	}
     	
-    	vm.sendCodetoEmail = function(){
-    		console.log(vm.cod_email);
-    		$http.post('sendToken', vm.cod_email).then(function (response) {
+    	vm.sendCodetoMobile = function(){
+    		console.log(vm.cod_mobile);
+    		$http.post('sendToken', vm.cod_mobile).then(function (response) {
             	console.log(response.data);
             });
     	}

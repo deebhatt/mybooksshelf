@@ -28,9 +28,9 @@ public class GuestUserController {
 	
 	@RequestMapping(value = "/sendToken", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseMessage sendverificationToken(@RequestBody String email, HttpServletResponse response)
+	public ResponseMessage sendverificationToken(@RequestBody String mobileNo, HttpServletResponse response)
 	{
-		ResponseMessage message = guestuserService.sendVerificationTokentoUser(email);
+		ResponseMessage message = guestuserService.sendVerificationTokentoUser(mobileNo);
 		Cookie cookie = new Cookie(PropertiesUtil.getProperty("cookie_guestUser"), message.getId());
 		cookie.setMaxAge(600);
 		response.addCookie(cookie);

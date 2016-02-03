@@ -25,8 +25,11 @@ public class GuestUser implements Serializable, BaseEntity{
 	@Column(name = "GUESTUSER_ID", unique = true, nullable = false)
 	private Long id;
 	
-	@Column(name="GUSETUSER_EMAIL", length=35, unique=true, nullable=false)
+	@Column(name="GUSETUSER_EMAIL", length=35, unique=true)
 	private String email;
+	
+	@Column(name="GUSETUSER_MOBILE", length=10, unique=true)
+	private String mobileNumber;
 	
 	@Column(name="TOKENCREATED_DATE")
 	private Long tokenCreatedDate;
@@ -48,6 +51,14 @@ public class GuestUser implements Serializable, BaseEntity{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 
 	public Long getTokenCreatedDate() {

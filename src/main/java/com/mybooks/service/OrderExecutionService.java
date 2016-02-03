@@ -61,19 +61,19 @@ public class OrderExecutionService {
 	public ResponseMessage createnewOrder(OrderFormBean orderform, String cookieSecret)
 	{
 		try {
-			String userEmail = null;
+			String userMobile = null;
 			List<Long> productIds = new ArrayList<Long>();
 			BigDecimal orderTotal = new BigDecimal(0);
 			if(!cookieSecret.equals("CookieNotFound"))
 			{
-				userEmail = SecurityUtil.decodeValue(cookieSecret);
+				userMobile = SecurityUtil.decodeValue(cookieSecret);
 			}
 			else
 			{
 				return new ResponseMessage(ResponseMessage.Type.danger,
 						"The session is expired. Please resend the token again!!!");
 			}
-			UserMaster customer = userService.findByEmail(userEmail);
+			UserMaster customer = userService.findByMobileNo(userMobile);
 			
 			List<ProductOrder> productOrder = orderform.getOrderProducts();
 			Map<Long, Integer> pidandQuantity = new HashMap<Long, Integer>();
@@ -123,10 +123,6 @@ public class OrderExecutionService {
 			LOG.error("Product List is empty, cannot save the order", e);
 			return new ResponseMessage(ResponseMessage.Type.danger,
 					"Product List is empty, cannot save the order. Please try again");
-		} catch (EmailNotFoundException e) {
-			LOG.error("User Not Found to create Order", e);
-			return new ResponseMessage(ResponseMessage.Type.danger,
-					"User Not Found to create Order. Please try again");
 		} catch (DAOException e) {
 			LOG.error("There was a technical error while processing Order", e);
 			return new ResponseMessage(ResponseMessage.Type.danger,
